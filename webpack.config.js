@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
+      inject: 'head',
       template: path.join(__dirname, 'src/index.ejs'),
     }),
   ],
@@ -38,9 +38,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, './dist'),
-    filename: (pathData) => {
-      return pathData.chunk.name === 'style' ? '[name].css' : '[name].js';
-    },
+    filename: '[name].[hash].js',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

@@ -16,8 +16,6 @@ module.exports = {
   resolve,
   output: {
     path: path.join(__dirname, './docs'),
-    filename: (pathData) => {
-      return pathData.chunk.name === 'style' ? '[name].css' : '[name].js';
-    },
+    filename: '[name].[hash].js',
   },
 };

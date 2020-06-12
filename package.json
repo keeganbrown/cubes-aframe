@@ -4,8 +4,10 @@
   "description": "",
   "main": "./docs/main.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack -p --config webpack.prod.js",
+    "start": "webpack-dev-server",
+    "build": "run-s build:clean build:wp",
+    "build:clean": "rm docs/*",
+    "build:wp": "webpack -p --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
