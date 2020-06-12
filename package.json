@@ -20,7 +20,8 @@
   "homepage": "https://github.com/keeganbrown/cubes-aframe#readme",
   "dependencies": {
     "@types/aframe": "^1.0.1",
-    "aframe": "^1.0.4"
+    "aframe": "^1.0.4",
+    "autoprefixer": "^9.8.0"
   },
   "devDependencies": {
     "css-loader": "^3.5.3",

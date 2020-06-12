@@ -45,7 +45,7 @@ function addBoxes(scene: Scene) {
       width: 0.75,
       height: 0.75,
       depth: 0.75,
-      color: '#777777',
+      color: '#8998ea',
     });
     return box;
   });
@@ -87,8 +87,18 @@ function addGrid(scene: Scene) {
   return boxes;
 }
 
+function addSky(scene: Scene) {
+  const mainSky = createAndSetAttributes('a-sphere', {
+    radius: 300,
+    material: { color: '#a4a4a4', side: 'back' },
+  });
+  scene?.appendChild(mainSky);
+  return mainSky;
+}
+
 function init() {
   const scene = document.getElementById('scene') as Scene;
+  addSky(scene);
   addFloor(scene);
   addBoxes(scene);
 }

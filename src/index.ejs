@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>hello world</h1>
+    <h1 id="loading">Loading</h1>
     <a-scene id="scene" auto-enter-vr>
       <a-sky color="#cdedc"></a-sky>
       <a-entity id="leftHand" hand-controls="left">
-        <a-box width="0.1" height="0.1" depth="0.1"></a-box>
+        <a-box width="0.1" height="0.1" depth="0.1" color="#993344"></a-box>
       </a-entity>
       <a-entity id="leftHand" hand-controls="right">
-        <a-box width="0.1" height="0.1" depth="0.1"></a-box>
+        <a-box width="0.1" height="0.1" depth="0.1" color="#334499"></a-box>
       </a-entity>
     </a-scene>
   </body>

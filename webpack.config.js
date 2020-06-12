@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.ts',
+    style: './src/css/main.css',
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -37,7 +38,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, './dist'),
-    filename: '[name].js',
+    filename: (pathData) => {
+      return pathData.chunk.name === 'style' ? '[name].css' : '[name].js';
+    },
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
