@@ -1,6 +1,5 @@
-import aframe, { Entity, Scene } from "aframe";
-
-console.log({ aframe });
+import AFRAME, { Entity, Scene } from 'aframe';
+import './components/auto-enter-vr';
 
 function createAndSetAttributes(
   elementName: string,
@@ -14,17 +13,17 @@ function createAndSetAttributes(
 }
 
 function addFloor(scene: Scene) {
-  const plane = createAndSetAttributes("a-plane", {
+  const plane = createAndSetAttributes('a-plane', {
     position: { x: 0, y: 0, z: -4 },
     rotation: { x: -90, y: 0, z: 0 },
     width: 10,
     height: 10,
-    color: "#365241",
+    color: '#365241',
   });
 
   scene?.appendChild(plane);
 
-  console.log("test", plane, scene);
+  console.log('test', plane, scene);
 
   return plane;
 }
@@ -41,12 +40,12 @@ function addBoxes(scene: Scene) {
     if (index % NUM === 0) {
       z++;
     }
-    const box = createAndSetAttributes("a-box", {
+    const box = createAndSetAttributes('a-box', {
       position: `${x + xShift} 0.3 ${-z + zShift}`,
       width: 0.75,
       height: 0.75,
       depth: 0.75,
-      color: "#777777",
+      color: '#777777',
     });
     return box;
   });
@@ -70,13 +69,13 @@ function addGrid(scene: Scene) {
     if (index % NUM === 0) {
       z++;
     }
-    const box = createAndSetAttributes("a-entity", {
+    const box = createAndSetAttributes('a-entity', {
       position: `${x + xShift} 0.3 ${-z + zShift}`,
       line: {},
       width: 0.75,
       height: 0.75,
       depth: 0.75,
-      color: "#777777",
+      color: '#777777',
     });
     return box;
   });
@@ -89,7 +88,7 @@ function addGrid(scene: Scene) {
 }
 
 function init() {
-  const scene = document.getElementById("scene") as Scene;
+  const scene = document.getElementById('scene') as Scene;
   addFloor(scene);
   addBoxes(scene);
 }
