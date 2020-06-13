@@ -18,17 +18,17 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(wasm)$/,
-        type: 'javascript/auto',
-        use: {
-          loader: 'file-loader',
-          options: {
-            outputPath: 'assets/wasm', //set this whatever path you desire
-            name: '[name]-[hash].[ext]',
-          },
-        },
-      },
+      // {
+      //   test: /\.(wasm)$/,
+      //   type: 'javascript/auto',
+      //   use: {
+      //     loader: 'file-loader',
+      //     options: {
+      //       outputPath: 'assets/wasm', //set this whatever path you desire
+      //       name: '[name]-[hash].[ext]',
+      //     },
+      //   },
+      // },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
