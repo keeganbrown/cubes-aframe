@@ -23,13 +23,16 @@
   "dependencies": {
     "@types/aframe": "^1.0.1",
     "aframe": "^1.0.4",
-    "autoprefixer": "^9.8.0"
+    "aframe-physics-system": "^4.0.1",
+    "ammo.js": "github:kripken/ammo.js#master"
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.0",
     "css-loader": "^3.5.3",
     "ejs-loader": "^0.5.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
-    "html-webpack-template": "^6.2.0",
+    "js-loader": "^0.1.1",
     "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
     "source-map-loader": "^1.0.0",

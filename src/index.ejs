@@ -8,13 +8,28 @@
   <body>
     <h1 id="loading">Loading</h1>
     <a-scene id="scene" auto-enter-vr>
-      <a-sky color="#cdedc"></a-sky>
-      <a-entity id="leftHand" hand-controls="left">
+      <a-sky color="#cdedcd"></a-sky>
+      <a-entity
+        id="leftHand"
+        laser-controls="hand: left"
+        raycaster="objects: [raycastable]; far: 25"
+        line="color: red; opacity: 0.75"
+      >
         <a-box width="0.1" height="0.1" depth="0.1" color="#993344"></a-box>
       </a-entity>
-      <a-entity id="leftHand" hand-controls="right">
+      <a-entity
+        id="rightHand"
+        laser-controls="hand: right;"
+        raycaster="objects: [raycastable]; far: 25"
+        line="color: red; opacity: 0.75"
+      >
         <a-box width="0.1" height="0.1" depth="0.1" color="#334499"></a-box>
       </a-entity>
+      <a-entity
+        cursor="rayOrigin: mouse"
+        raycaster="objects: [raycastable]; far: 25"
+        line="color: red; opacity: 0.75"
+      ></a-entity>
     </a-scene>
   </body>
 </html>

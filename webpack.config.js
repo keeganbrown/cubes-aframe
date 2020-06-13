@@ -13,11 +13,29 @@ module.exports = {
       template: path.join(__dirname, 'src/index.ejs'),
     }),
   ],
+  node: {
+    fs: 'empty',
+  },
   module: {
     rules: [
       {
+        test: /\.(wasm)$/,
+        type: 'javascript/auto',
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/wasm', //set this whatever path you desire
+            name: '[name]-[hash].[ext]',
+          },
+        },
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
+        // include: [
+        //   // path.join(__dirname, 'src/polyfill.ts'),
+        //   require.resolve('aframe-physics-system'),
+        // ],
         exclude: /node_modules/,
       },
       {
