@@ -5,6 +5,7 @@
   "main": "./docs/main.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "start:lan": "webpack-dev-server --host 0.0.0.0 --public 192.168.1.6:9000 --https",
     "build": "run-s build:clean build:wp build:git",
     "build:clean": "rm docs/*",
     "build:wp": "webpack -p --config webpack.prod.js",
@@ -23,9 +24,11 @@
   "homepage": "https://github.com/keeganbrown/cubes-aframe#readme",
   "dependencies": {
     "@types/aframe": "^1.0.1",
+    "@types/ramda": "^0.27.6",
     "aframe": "^1.0.4",
     "aframe-physics-system": "^4.0.1",
-    "ammo.js": "github:kripken/ammo.js#master"
+    "ammo.js": "github:kripken/ammo.js#master",
+    "ramda": "^0.27.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",

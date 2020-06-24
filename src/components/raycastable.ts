@@ -6,5 +6,8 @@ AFRAME.registerComponent('raycastable', {
   },
   init: function (props) {
     console.log(this.el.object3D);
+    this.el.addEventListener('click', (e) => {
+      console.log('raycastable click', e);
+    });
   },
 });
