@@ -1,5 +1,10 @@
-import AFRAME, { ComponentDefinition, Entity, THREE } from 'aframe';
-import { assocPath, path } from 'ramda';
+import AFRAME, {
+  ComponentDefinition,
+  Entity,
+  THREE,
+  DetailEvent,
+} from 'aframe';
+import { assocPath, path, defaultTo } from 'ramda';
 
 interface SpecialComponent extends ComponentDefinition {
   delta: number;
@@ -8,6 +13,10 @@ interface SpecialComponent extends ComponentDefinition {
   direction: THREE.Quaternion;
   normal: THREE.Vector3;
   onDrive: Function;
+}
+
+function getControllerQuaternion(event: DetailEvent<Entity>): THREE.Quaternion {
+  return event?.target?.object3D?.quaternion as THREE.Quaternion;
 }
 
 export default AFRAME.registerComponent('camera-float-motion', {
@@ -22,13 +31,18 @@ export default AFRAME.registerComponent('camera-float-motion', {
     this.rig = this.camera?.parent as THREE.Object3D;
 
     this.el?.sceneEl?.addEventListener('mousedown', this.onDrive.bind(this));
-    this.el?.sceneEl?.addEventListener('triggerdown', this.onDrive.bind(this));
+    this.el?.sceneEl?.addEventListener('buttondown', this.onDrive.bind(this));
   },
 
-  onDrive(event: CustomEvent) {
-    this.delta = 0.05;
-    this.normal.set(0, 0, 1);
-    this.normal.applyQuaternion(this.camera?.quaternion as THREE.Quaternion);
+  onDrive(event: DetailEvent<Entity>) {
+    if (event.target.components['oculus-touch-controls']) {
+      const controllerHeading = getControllerQuaternion(event);
+      console.log({ event, controllerHeading });
+      // debugger;
+      this.delta = 0.05;
+      this.normal.set(0, 0, 1);
+      this.normal.applyQuaternion(controllerHeading);
+    }
   },
 
   tick() {
