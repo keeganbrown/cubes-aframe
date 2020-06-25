@@ -4,38 +4,45 @@ import { assocPath, path } from 'ramda';
 interface SpecialComponent extends ComponentDefinition {
   delta: number;
   camera: THREE.Object3D | undefined | null;
-  direction: THREE.Vector3;
+  rig: THREE.Object3D | undefined | null;
+  direction: THREE.Quaternion;
+  normal: THREE.Vector3;
   onDrive: Function;
 }
 
 export default AFRAME.registerComponent('camera-float-motion', {
   delta: 0.05,
   camera: null,
-  direction: new THREE.Vector3(),
+  rig: null,
+  normal: new THREE.Vector3(0, 0, -1),
+  direction: new THREE.Quaternion(),
 
   init() {
-    this.camera = path(
-      ['el', 'object3D', 'children', '0'],
-      this
-    ) as THREE.Object3D;
+    this.camera = this.el?.object3D as THREE.Object3D;
+    this.rig = this.camera?.parent as THREE.Object3D;
 
     this.el?.sceneEl?.addEventListener('mousedown', this.onDrive.bind(this));
     this.el?.sceneEl?.addEventListener('triggerdown', this.onDrive.bind(this));
   },
 
   onDrive(event: CustomEvent) {
-    console.log({ event, camera: this.camera });
     this.delta = 0.05;
-    this.camera?.getWorldDirection(this.direction);
+    // const test1 = new THREE.Vector3();
+    // const test2 = new THREE.Vector3();
+    // this.direction = this.camera?.getWorldDirection();
+    this.normal.set(0, 0, 1);
+    this.normal.applyQuaternion(this.camera?.quaternion as THREE.Quaternion);
+    console.log({
+      c: this.camera,
+      n: this.normal,
+    });
   },
 
   tick() {
     if (this.delta > 0.00001) {
       this.delta *= 0.9;
 
-      const rig = this.camera?.parent as THREE.Object3D;
-
-      rig.position.addScaledVector(this.direction, this.delta);
+      this.rig?.position?.addScaledVector(this.normal, -this.delta);
     }
   },
 } as SpecialComponent);

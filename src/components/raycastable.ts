@@ -1,6 +1,6 @@
 import AFRAME from 'aframe';
 
-AFRAME.registerComponent('raycastable', {
+export default AFRAME.registerComponent('raycastable', {
   schema: {
     delay: { type: 'number', default: 0 },
   },
