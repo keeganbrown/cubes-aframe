@@ -27,21 +27,13 @@ export default AFRAME.registerComponent('camera-float-motion', {
 
   onDrive(event: CustomEvent) {
     this.delta = 0.05;
-    // const test1 = new THREE.Vector3();
-    // const test2 = new THREE.Vector3();
-    // this.direction = this.camera?.getWorldDirection();
     this.normal.set(0, 0, 1);
     this.normal.applyQuaternion(this.camera?.quaternion as THREE.Quaternion);
-    console.log({
-      c: this.camera,
-      n: this.normal,
-    });
   },
 
   tick() {
     if (this.delta > 0.00001) {
       this.delta *= 0.9;
-
       this.rig?.position?.addScaledVector(this.normal, -this.delta);
     }
   },
