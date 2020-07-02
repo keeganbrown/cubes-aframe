@@ -15,11 +15,12 @@ export function addBoxes(scene: Scene) {
       z++;
     }
     const box = createAndSetAttributes('a-box', {
-      position: { x: x + xShift, y: 0.3, z: -z + zShift },
+      position: { x: x + xShift, y: 10.3, z: -z + zShift },
       width: BOX_SIZE,
       height: BOX_SIZE,
       depth: BOX_SIZE,
       'falling-block': { delay: Math.random() },
+      'dynamic-body': {},
       color: '#8998ea',
       raycastable: {},
     });

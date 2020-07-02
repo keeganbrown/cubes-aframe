@@ -1,6 +1,7 @@
 import './polyfill';
 import { Scene } from 'aframe';
 import './components/';
+import './systems/';
 import { addBoxes, addFloor, addSky, addGrid } from './constructors/index';
 
 function init() {

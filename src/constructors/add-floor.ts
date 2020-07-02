@@ -8,6 +8,7 @@ export function addFloor(scene: Scene) {
     width: 20,
     height: 20,
     color: '#365241',
+    'static-body': {},
   });
 
   scene?.appendChild(plane);

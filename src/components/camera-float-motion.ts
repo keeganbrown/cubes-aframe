@@ -4,9 +4,9 @@ import AFRAME, {
   THREE,
   DetailEvent,
 } from 'aframe';
-import { assocPath, path, defaultTo } from 'ramda';
+import { path } from 'ramda';
 
-interface SpecialComponent extends ComponentDefinition {
+interface CameraFloatMotionSystem extends ComponentDefinition {
   delta: number;
   camera: THREE.Object3D | undefined | null;
   rig: THREE.Object3D | undefined | null;
@@ -19,7 +19,9 @@ function getControllerQuaternion(event: DetailEvent<Entity>): THREE.Quaternion {
   return event?.target?.object3D?.quaternion as THREE.Quaternion;
 }
 
-export default AFRAME.registerComponent('camera-float-motion', {
+export default AFRAME.registerComponent('camera-float-motion', <
+  CameraFloatMotionSystem
+>{
   delta: 0.05,
   camera: null,
   rig: null,
@@ -35,7 +37,7 @@ export default AFRAME.registerComponent('camera-float-motion', {
   },
 
   onDrive(event: DetailEvent<Entity>) {
-    if (event.target.components['oculus-touch-controls']) {
+    if (path(['target', 'components', 'oculus-touch-controls'], event)) {
       const controllerHeading = getControllerQuaternion(event);
       console.log({ event, controllerHeading });
       // debugger;
@@ -51,4 +53,4 @@ export default AFRAME.registerComponent('camera-float-motion', {
       this.rig?.position?.addScaledVector(this.normal, -this.delta);
     }
   },
-} as SpecialComponent);
+});
