@@ -4,10 +4,13 @@ export default AFRAME.registerComponent('raycastable', {
   schema: {
     delay: { type: 'number', default: 0 },
   },
+
+  handleRaycast: function (event) {
+    console.log(event.target);
+    event.target.body.position.y = 10;
+  },
+
   init: function (props) {
-    console.log(this.el.object3D);
-    this.el.addEventListener('click', (e) => {
-      console.log('raycastable click', e);
-    });
+    this.el.addEventListener('click', this.handleRaycast.bind(this));
   },
 });

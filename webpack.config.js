@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -11,6 +12,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: 'head',
       template: path.join(__dirname, 'src/index.ejs'),
+      templateParameters: {
+        debugPhysics: JSON.stringify(process.env.NODE_ENV !== 'production'),
+      },
+    }),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
     }),
   ],
   node: {
@@ -18,24 +25,9 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(wasm)$/,
-      //   type: 'javascript/auto',
-      //   use: {
-      //     loader: 'file-loader',
-      //     options: {
-      //       outputPath: 'assets/wasm', //set this whatever path you desire
-      //       name: '[name]-[hash].[ext]',
-      //     },
-      //   },
-      // },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        // include: [
-        //   // path.join(__dirname, 'src/polyfill.ts'),
-        //   require.resolve('aframe-physics-system'),
-        // ],
         exclude: /node_modules/,
       },
       {

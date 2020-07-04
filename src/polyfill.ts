@@ -28,3 +28,5 @@ window.AFRAME.THREE.AmmoDebugConstants = {
 // console.log(AmmoDebug);
 
 require('aframe-physics-system');
+
+declare var PRODUCTION: boolean;

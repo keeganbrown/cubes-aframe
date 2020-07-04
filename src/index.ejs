@@ -10,7 +10,7 @@
     <a-scene
       id="scene"
       auto-enter-vr
-      physics="debug: true; gravity: -9.8; debugDrawMode: 2049"
+      physics="debug: <%= debugPhysics %>; gravity: -5.8;  <%= debugPhysics === 'true' ? 'debugDrawMode: 2049' : '' %>"
     >
       <a-sky color="#cdedcd"></a-sky>
 

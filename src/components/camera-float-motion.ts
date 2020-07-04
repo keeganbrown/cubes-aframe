@@ -6,7 +6,7 @@ import AFRAME, {
 } from 'aframe';
 import { path } from 'ramda';
 
-interface CameraFloatMotionSystem extends ComponentDefinition {
+interface CameraFloatMotionComponent extends ComponentDefinition {
   delta: number;
   camera: THREE.Object3D | undefined | null;
   rig: THREE.Object3D | undefined | null;
@@ -19,9 +19,7 @@ function getControllerQuaternion(event: DetailEvent<Entity>): THREE.Quaternion {
   return event?.target?.object3D?.quaternion as THREE.Quaternion;
 }
 
-export default AFRAME.registerComponent('camera-float-motion', <
-  CameraFloatMotionSystem
->{
+export default AFRAME.registerComponent('camera-float-motion', {
   delta: 0.05,
   camera: null,
   rig: null,
@@ -33,7 +31,7 @@ export default AFRAME.registerComponent('camera-float-motion', <
     this.rig = this.camera?.parent as THREE.Object3D;
 
     this.el?.sceneEl?.addEventListener('mousedown', this.onDrive.bind(this));
-    this.el?.sceneEl?.addEventListener('buttondown', this.onDrive.bind(this));
+    this.el?.sceneEl?.addEventListener('gripdown', this.onDrive.bind(this));
   },
 
   onDrive(event: DetailEvent<Entity>) {
@@ -53,4 +51,4 @@ export default AFRAME.registerComponent('camera-float-motion', <
       this.rig?.position?.addScaledVector(this.normal, -this.delta);
     }
   },
-});
+} as CameraFloatMotionComponent);

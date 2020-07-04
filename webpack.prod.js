@@ -1,19 +1,11 @@
-const {
-  entry,
-  devtool,
-  plugins,
-  module: _module,
-  resolve,
-  output,
-} = require('./webpack.config');
+const { ...configValues } = require('./webpack.config');
 const path = require('path');
+const plugins = configValues.plugins;
 
 module.exports = {
-  entry,
-  devtool,
+  ...configValues,
   plugins,
-  module: _module,
-  resolve,
+  mode: 'production',
   output: {
     path: path.join(__dirname, './docs'),
     filename: '[name].[hash].js',

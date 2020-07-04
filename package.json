@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "start:lan": "webpack-dev-server --host 0.0.0.0 --public 192.168.1.6:9000 --https",
-    "build": "run-s build:clean build:wp build:git",
-    "build:clean": "rm docs/*",
+    "build": "NODE_ENV=production run-s build:clean build:wp build:git",
+    "build:clean": "touch docs/clean && rm docs/*",
     "build:wp": "webpack -p --config webpack.prod.js",
     "build:git": "git add ./docs",
     "test": "echo \"Error: no test specified\" && exit 1"

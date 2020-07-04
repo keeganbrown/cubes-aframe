@@ -1,7 +1,7 @@
-import AFRAME, { Entity, SystemDefinition } from 'aframe';
+import AFRAME, { Entity, SystemDefinition, ComponentDefinition } from 'aframe';
 
 export interface FallingBlockSystem extends SystemDefinition {
-  entities: Entity[];
+  entities: any[];
 }
 
 let entitiyCount = 0;
@@ -10,12 +10,16 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
   entities: [],
   init: function () {},
 
-  registerMe: function (el: Entity) {
-    this.entities.push(el);
+  registerMe: function (comp) {
+    this.entities.push(comp);
+    // @ts-ignore
+    setTimeout(() => {
+      console.log(comp.el.body);
+    }, 100);
   },
 
-  unregisterMe: function (el: Entity) {
-    var index = this.entities.indexOf(el);
+  unregisterMe: function (comp) {
+    var index = this.entities.indexOf(comp);
     this.entities.splice(index, 1);
   },
 
