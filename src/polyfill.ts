@@ -22,11 +22,11 @@ window.AFRAME.THREE.AmmoDebugConstants = {
   FastWireframe: 1 << 13, //8192
   DrawNormals: 1 << 14, //16384
   DrawOnTop: 1 << 15, //32768
-  MAX_DEBUG_DRAW_MODE: 0xffffffff,
+  MAX_DEBUG_DRAW_MODE: 0xffffffff
 };
 
 // console.log(AmmoDebug);
 
-require('aframe-physics-system');
+// require('aframe-physics-system');
 
 declare var PRODUCTION: boolean;

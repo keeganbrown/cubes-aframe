@@ -1,39 +1,53 @@
 import { Scene, Entity } from 'aframe';
 import { createAndSetAttributes } from './helpers';
 
+const STARTING_Y = 10;
+const GAP_SIZE = 1;
+const BOX_SIZE = 0.8;
+const zShift = -1.5;
+const xShift = -1.5;
+
 export function addBoxesLayer(YSHIFT = 0) {
   const NUM = 4;
-  const GAP_SIZE = 1;
-  const BOX_SIZE = 0.7;
+
   let x = 0;
   let z = 0;
-  const xShift = -1.5;
-  const zShift = -1.5;
   const boxes = new Array(NUM * NUM).fill(1).map((_, index) => {
     x++;
     x %= NUM;
     if (index % NUM === 0) {
       z++;
     }
+
+    if (Math.random() > 0.4) {
+      return;
+    }
+
+    const boxX = x;
+    const boxY = STARTING_Y + GAP_SIZE * YSHIFT;
+    const boxZ = -z;
+    const position = { x: boxX, y: boxY, z: boxZ };
     const box = createAndSetAttributes('a-box', {
-      position: { x: x + xShift, y: 7 + GAP_SIZE * YSHIFT, z: -z + zShift },
+      position: position,
       width: BOX_SIZE,
       height: BOX_SIZE,
       depth: BOX_SIZE,
       'falling-block': {
         delay: Math.random() + YSHIFT,
-        x: x + xShift,
-        y: 10 + GAP_SIZE * YSHIFT,
-        z: -z + zShift,
+        x: boxX,
+        y: boxY,
+        z: boxZ,
+        xIndex: x,
+        zIndex: z
       },
       'dynamic-body': {
         shape: 'box',
-        mass: 1,
-        angularDamping: 0.5,
-        linearDamping: 0.2,
+        mass: 10,
+        angularDamping: 1,
+        linearDamping: 0.9
       },
       color: '#8998ea',
-      raycastable: {},
+      'block-interact': {}
     });
     return box;
   });
@@ -42,6 +56,14 @@ export function addBoxesLayer(YSHIFT = 0) {
 }
 
 export function addBoxes(scene: Scene) {
+  const boxGroup = createAndSetAttributes('a-entity', {
+    position: {
+      y: GAP_SIZE / 2,
+      x: xShift,
+      z: zShift
+    }
+  });
+
   const NUM = 5;
   const boxesLayers = new Array(NUM).fill(1).map((_, index) => {
     return addBoxesLayer(index);
@@ -51,10 +73,14 @@ export function addBoxes(scene: Scene) {
 
   boxesLayers.forEach((boxesLayer) => {
     boxesLayer.forEach((box) => {
-      scene?.appendChild(box);
-      boxes.push(box);
+      if (box) {
+        boxGroup?.appendChild(box);
+        boxes.push(box);
+      }
     });
   });
 
-  return boxes;
+  scene?.appendChild(boxGroup);
+
+  return boxGroup;
 }
