@@ -13,6 +13,9 @@
       fog="type: linear; color: #eee; near: 1; far: 10;"
       physics="friction: 0.1; iterations: 5; debug: <%= debugPhysics %>; gravity: -2;  <%= debugPhysics === 'true' ? 'debugDrawMode: 2049' : '' %>"
     >
+      <a-assets>
+        <img id="rough" src="/assets/rough.jpg" alt="" />
+      </a-assets>
       <a-sky color="#cdedcd"></a-sky>
       <a-plane
         position="0 0 -4"

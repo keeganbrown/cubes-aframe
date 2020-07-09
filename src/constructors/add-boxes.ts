@@ -32,6 +32,7 @@ export function addBoxesLayer(YSHIFT = 0) {
       width: BOX_SIZE,
       height: BOX_SIZE,
       depth: BOX_SIZE,
+      material: { src: '#rough' },
       'falling-block': {
         delay: Math.random() + YSHIFT,
         x: boxX,
@@ -57,6 +58,7 @@ export function addBoxesLayer(YSHIFT = 0) {
 
 export function addBoxes(scene: Scene) {
   const boxGroup = createAndSetAttributes('a-entity', {
+    id: 'boxes',
     position: {
       y: GAP_SIZE / 2,
       x: xShift,

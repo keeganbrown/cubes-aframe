@@ -68,7 +68,7 @@ function addGridLayer(yAxis = 1) {
 }
 
 export function addGrid(scene: Scene) {
-  const LAYERS = 5;
+  const LAYERS = 2;
   const fullGrid = createAndSetAttributes('a-entity', {
     'geometry-merger': { preserveOriginal: false }
   });

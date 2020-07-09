@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.ts',
-    style: './src/css/main.css',
+    style: './src/css/main.css'
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -13,46 +13,50 @@ module.exports = {
       inject: 'head',
       template: path.join(__dirname, 'src/index.ejs'),
       templateParameters: {
-        debugPhysics: JSON.stringify(process.env.NODE_ENV !== 'production'),
-      },
+        debugPhysics: JSON.stringify(process.env.NODE_ENV !== 'production')
+      }
     }),
     new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
-    }),
+      PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production')
+    })
   ],
   node: {
-    fs: 'empty',
+    fs: 'empty'
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.ejs$/,
         loader: 'ejs-loader',
         options: {
-          esModule: false,
-        },
+          esModule: false
+        }
       },
-    ],
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
+      }
+    ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.html'],
+    extensions: ['.tsx', '.ts', '.js', '.html']
   },
   output: {
     path: path.join(__dirname, './dist'),
-    filename: '[name].[hash].js',
+    filename: '[name].[hash].js'
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000,
-  },
+    port: 9000
+  }
 };
