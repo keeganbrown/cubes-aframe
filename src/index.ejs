@@ -10,9 +10,28 @@
     <a-scene
       id="scene"
       auto-enter-vr
+      fog="type: linear; color: #eee; near: 1; far: 10;"
       physics="friction: 0.1; iterations: 5; debug: <%= debugPhysics %>; gravity: -2;  <%= debugPhysics === 'true' ? 'debugDrawMode: 2049' : '' %>"
     >
       <a-sky color="#cdedcd"></a-sky>
+      <a-plane
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="500"
+        height="500"
+        color="#575575"
+        shadow="recieve: true; cast: false"
+        static-body
+      ></a-plane>
+      <a-entity light="type: ambient; color: #FFF; intensity: 0.7"></a-entity>
+      <a-entity
+        light="type: directional; color: #FFF; intensity: 0.5; castShadow: true;"
+        position="0 15 20"
+      ></a-entity>
+      <a-entity
+        light="type: directional; color: #FFF; intensity: 0.25; castShadow: true;"
+        position="15 15 20"
+      ></a-entity>
 
       <a-entity
         cursor="rayOrigin: mouse"

@@ -32,6 +32,7 @@ export function addBoxesLayer(YSHIFT = 0) {
       width: BOX_SIZE,
       height: BOX_SIZE,
       depth: BOX_SIZE,
+      shadow: { recieve: true, cast: true },
       'falling-block': {
         delay: Math.random() + YSHIFT,
         x: boxX,

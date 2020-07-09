@@ -26,6 +26,7 @@
     "@types/aframe": "^1.0.1",
     "@types/ramda": "^0.27.6",
     "aframe": "^1.0.4",
+    "aframe-geometry-merger-component": "^2.0.0",
     "aframe-physics-system": "^4.0.1",
     "ammo.js": "github:kripken/ammo.js#master",
     "ramda": "^0.27.0"

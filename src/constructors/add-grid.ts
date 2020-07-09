@@ -69,11 +69,17 @@ function addGridLayer(yAxis = 1) {
 
 export function addGrid(scene: Scene) {
   const LAYERS = 5;
+  const fullGrid = createAndSetAttributes('a-entity', {
+    'geometry-merger': { preserveOriginal: false }
+  });
+
   const gridLayers = new Array(LAYERS).fill(0).map((_, i) => {
     const gridLayer = addGridLayer(i + 0.1);
-    scene?.appendChild(gridLayer);
+    fullGrid?.appendChild(gridLayer);
     return gridLayer;
   });
 
-  return gridLayers;
+  scene.appendChild(fullGrid);
+
+  return fullGrid;
 }

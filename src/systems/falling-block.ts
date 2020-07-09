@@ -35,13 +35,6 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
 
   init: function () {
     console.log('init system');
-    // @ts-ignore
-    setTimeout(() => {
-      console.log(this.entities, this.targetY);
-    }, 100);
-    setTimeout(() => {
-      console.log(this.entities, this.targetY);
-    }, 3000);
   },
 
   registerMe: function (comp, props) {
@@ -71,7 +64,7 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
 
         this.targetY[index] = this.targetY[index] - 1;
       });
-      console.log(entityGridMap);
+      // console.log(entityGridMap);
       return;
     }
 
