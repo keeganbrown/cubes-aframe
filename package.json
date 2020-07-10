@@ -6,8 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server",
     "start:lan": "webpack-dev-server --host 0.0.0.0 --public 192.168.1.6:9000 --https",
-    "deploy": "run-s build",
-    "deploy:add": "git commit -a -m \"Auto-deploy commit: $(date '+%Y-%m-%d %H:%M:%S')\"",
+    "deploy": "run-s build deploy:commit deploy:version deploy:push",
+    "deploy:commit": "git commit -a -m \"Auto-deploy commit: $(date '+%Y-%m-%d %H:%M:%S')\"",
+    "deploy:version": "npm version patch",
+    "deploy:push": "git push",
     "build": "NODE_ENV=production run-s build:clean build:wp build:git",
     "build:clean": "touch docs/clean && rm -r docs/* && cp -r dist/assets docs/",
     "build:wp": "webpack -p --config webpack.prod.js",
