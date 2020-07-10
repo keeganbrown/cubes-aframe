@@ -16,8 +16,8 @@ export default AFRAME.registerComponent('falling-block', {
     if (this.system) {
       <FallingBlockSystem>this.system.registerMe(this, this.data);
     }
-    const mesh = this.el.object3D.children[0];
-    console.log(mesh);
+    // const mesh = this.el.object3D.children[0];
+    // console.log(mesh);
   },
   tick: function (time, timeDelta) {
     // if (!mesh.material.bumpMap) {

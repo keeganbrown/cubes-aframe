@@ -54,7 +54,10 @@ export default AFRAME.registerComponent('camera-float-motion', {
   },
 
   onSteer(event) {
-    if (this.delta > 0.00001) {
+    if (
+      this.delta > 0.00001 &&
+      path(['target', 'components', 'oculus-touch-controls'], event)
+    ) {
       this.normal.set(0, 0, 1);
       this.normal.applyQuaternion(getControllerQuaternion(event));
     }

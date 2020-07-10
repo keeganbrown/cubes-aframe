@@ -9,9 +9,9 @@
     <h1 id="loading">Loading</h1>
     <a-scene
       id="scene"
+      stats
       auto-enter-vr
       fog="type: linear; color: #eee; near: 1; far: 10;"
-      physics="friction: 0.1; iterations: 5; debug: <%= debugPhysics %>; gravity: -2;  <%= debugPhysics === 'true' ? 'debugDrawMode: 2049' : '' %>"
     >
       <a-assets>
         <a-cubemap id="rough">

@@ -8,7 +8,7 @@ export function addFloor(scene: Scene) {
     width: 500,
     height: 500,
     color: '#365241',
-    shadow: { recieve: true, cast: false },
+    material: { shader: 'flat' },
     'static-body': {}
   });
 

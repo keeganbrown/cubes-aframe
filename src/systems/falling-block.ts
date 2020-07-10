@@ -39,6 +39,10 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
         this.waveClock = MOVE_INC;
       }
     });
+
+    document.addEventListener('pushed', (event) => {
+      console.log(event);
+    });
   },
 
   registerMe: function (comp, props) {
@@ -51,40 +55,45 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
     this.entities.splice(index, 1);
   },
 
+  setTargetY: function () {
+    this.entities.forEach((comp, index) => {
+      const gridMapSlot = getGridMapSlot(comp.data.xIndex, comp.data.zIndex);
+      if (gridMapSlot.includes(comp)) {
+        return;
+      }
+      if (comp.el.object3D.position.y - gridMapSlot.length <= 0) {
+        gridMapSlot.push(comp);
+        return;
+      }
+
+      this.targetY[index] = this.targetY[index] - 1;
+    });
+  },
+
+  updateY: function () {
+    this.entities.forEach((comp, index) => {
+      const yTarget = this.targetY[index];
+      if (comp.el.object3D.position.y - yTarget > 0.01) {
+        comp.el.object3D.position.y -= 0.1;
+      } else {
+        comp.el.object3D.position.y = yTarget;
+      }
+    });
+  },
+
   tick: function (time: number, timeDelta: number) {
     this.waveClock = this.waveClock - TICK;
     if (this.waveClock < 0) {
       this.moveClock = MOVE_INC;
       this.waveClock = WAVE_INC;
-      this.entities.forEach((comp, index) => {
-        const gridMapSlot = getGridMapSlot(comp.data.xIndex, comp.data.zIndex);
-        if (gridMapSlot.includes(comp)) {
-          return;
-        }
-        if (comp.el.object3D.position.y - gridMapSlot.length <= 0) {
-          gridMapSlot.push(comp);
-          return;
-        }
-
-        this.targetY[index] = this.targetY[index] - 1;
-      });
+      this.setTargetY();
 
       return;
     }
 
     if (this.moveClock > 0) {
       this.moveClock = this.moveClock - 0.1;
-      this.entities.forEach((comp, index) => {
-        const yTarget = this.targetY[index];
-        if (comp.el.object3D.position.y - yTarget > 0.01) {
-          comp.el.object3D.position.y -= 0.1;
-        } else {
-          comp.el.object3D.position.y = yTarget;
-        }
-      });
+      this.updateY();
     }
-
-    // this.el.object3D.position.y =
-    //   Math.sin((time + this.data.delay * 1000) / 500) + 1.5;
   }
 });
