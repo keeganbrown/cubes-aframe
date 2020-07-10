@@ -8,8 +8,8 @@ export default AFRAME.registerComponent('debug-controller', {
   },
 
   init: function () {
-    this.el.addEventListener('buttondown', (event) => {
-      console.trace({ ...event.detail });
-    });
+    // this.el.addEventListener('buttondown', (event) => {
+    //   console.trace({ ...event.detail });
+    // });
   }
 });

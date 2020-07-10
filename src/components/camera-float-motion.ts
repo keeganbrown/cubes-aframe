@@ -38,16 +38,22 @@ export default AFRAME.registerComponent('camera-float-motion', {
       this.taper = 0.8;
     });
     this.el?.sceneEl?.addEventListener('gripdown', this.onDrive.bind(this));
+    this.el?.sceneEl?.addEventListener('axismove', this.onSteer.bind(this));
   },
 
   onDrive(event: DetailEvent<Entity>) {
     if (path(['target', 'components', 'oculus-touch-controls'], event)) {
-      const controllerHeading = getControllerQuaternion(event);
-      // debugger;
       this.taper = 1;
-      this.delta = 0.03;
+      this.delta = 0.02;
       this.normal.set(0, 0, 1);
-      this.normal.applyQuaternion(controllerHeading);
+      this.normal.applyQuaternion(getControllerQuaternion(event));
+    }
+  },
+
+  onSteer(event) {
+    if (this.delta > 0.00001) {
+      this.normal.set(0, 0, 1);
+      this.normal.applyQuaternion(getControllerQuaternion(event));
     }
   },
 

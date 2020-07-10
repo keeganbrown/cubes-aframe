@@ -5,8 +5,8 @@ export default AFRAME.registerComponent('block-interact', {
     delay: { type: 'number', default: 0 }
   },
 
-  handleRaycast: function (target: Entity) {
-    console.log(target);
+  handleRaycast: function (raycastTarget: Entity) {
+    console.log({ raycastTarget });
   },
 
   init: function (props) {

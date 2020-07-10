@@ -19,7 +19,6 @@ export default AFRAME.registerComponent('falling-block', {
   tick: function (time, timeDelta) {
     const mesh = this.el.object3D.children[0];
     if (!mesh.material.bumpMap) {
-      console.log(mesh);
       mesh.material.bumpMap = mesh.material.map;
       mesh.material.bumpScale = 0.01;
       mesh.material.map = null;
