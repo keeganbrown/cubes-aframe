@@ -38,7 +38,10 @@ export default AFRAME.registerComponent('camera-float-motion', {
       this.taper = 0.8;
     });
     this.el?.sceneEl?.addEventListener('gripdown', this.onDrive.bind(this));
-    this.el?.sceneEl?.addEventListener('axismove', this.onSteer.bind(this));
+    this.el?.sceneEl?.addEventListener(
+      'controllersupdated',
+      this.onSteer.bind(this)
+    );
   },
 
   onDrive(event: DetailEvent<Entity>) {

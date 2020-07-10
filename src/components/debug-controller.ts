@@ -7,9 +7,11 @@ export default AFRAME.registerComponent('debug-controller', {
     enabled: { default: false }
   },
 
-  init: function () {
-    // this.el.addEventListener('buttondown', (event) => {
-    //   console.trace({ ...event.detail });
-    // });
+  init: function () {},
+
+  events: {
+    buttondown: (event) => {
+      console.log({ ...event.detail });
+    }
   }
 });

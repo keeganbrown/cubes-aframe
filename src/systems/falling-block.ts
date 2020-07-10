@@ -15,8 +15,6 @@ const getGridMapSlot = (x: number, z: number) => {
   return entityGridMap[gridKey(x, z)];
 };
 
-console.log({ entityGridMap });
-
 export interface FallingBlockSystem extends SystemDefinition {
   entities: any[];
   waveClock: number;
@@ -34,7 +32,13 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
   moveClock: MOVE_INC,
 
   init: function () {
-    console.log('init system');
+    console.log('init falling-block system');
+    document.addEventListener('keydown', (event) => {
+      console.log('keydown');
+      if (event.key === 'f') {
+        this.waveClock = MOVE_INC;
+      }
+    });
   },
 
   registerMe: function (comp, props) {
@@ -64,7 +68,7 @@ export default AFRAME.registerSystem('falling-block', <FallingBlockSystem>{
 
         this.targetY[index] = this.targetY[index] - 1;
       });
-      // console.log(entityGridMap);
+
       return;
     }
 

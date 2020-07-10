@@ -2,6 +2,7 @@ import AFRAME from 'aframe';
 import { FallingBlockSystem } from '../systems/falling-block';
 
 export default AFRAME.registerComponent('falling-block', {
+  dependencies: ['position', 'width', 'height', 'depth', 'material'],
   schema: {
     delay: { type: 'number', default: 0 },
     xIndex: { type: 'number', default: 0 },
@@ -15,13 +16,15 @@ export default AFRAME.registerComponent('falling-block', {
     if (this.system) {
       <FallingBlockSystem>this.system.registerMe(this, this.data);
     }
+    const mesh = this.el.object3D.children[0];
+    console.log(mesh);
   },
   tick: function (time, timeDelta) {
-    const mesh = this.el.object3D.children[0];
-    if (!mesh.material.bumpMap) {
-      mesh.material.bumpMap = mesh.material.map;
-      mesh.material.bumpScale = 0.01;
-      mesh.material.map = null;
-    }
+    // if (!mesh.material.bumpMap) {
+    //   console.log(mesh.material);
+    //   mesh.material.bumpMap = mesh.material.map;
+    //   mesh.material.bumpScale = 0.01;
+    //   mesh.material.map = null;
+    // }
   }
 });

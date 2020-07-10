@@ -32,7 +32,7 @@ export function addBoxesLayer(YSHIFT = 0) {
       width: BOX_SIZE,
       height: BOX_SIZE,
       depth: BOX_SIZE,
-      material: { src: '#rough' },
+      material: { envMap: '#rough', roughness: 0.2 },
       'falling-block': {
         delay: Math.random() + YSHIFT,
         x: boxX,
